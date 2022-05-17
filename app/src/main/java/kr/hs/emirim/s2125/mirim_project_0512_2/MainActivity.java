@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         edit1 = findViewById(R.id.edit1);
         edit2 = findViewById(R.id.edit2);
         textResult = findViewById(R.id.text_result);
-        Button btnPluss = findViewById(R.id.btn_plus);
+        Button btnPlus = findViewById(R.id.btn_plus);
         Button btnMinus = findViewById(R.id.btn_minus);
         Button btnMulti = findViewById(R.id.btn_multi);
         Button btnDivide = findViewById(R.id.btn_divide);
@@ -49,5 +49,34 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+        btnPlus.setOnClickListener(btnlistener);
+        btnMinus.setOnClickListener(btnlistener);
+        btnMulti.setOnClickListener(btnlistener);
+        btnDivide.setOnClickListener(btnlistener);
+
     }
+    View.OnClickListener btnlistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            int result = 0;
+            int num1=Integer.parseInt(edit1.getText().toString());
+            int num2=Integer.parseInt(edit2.getText().toString());
+
+            switch(view.getId()){
+                case R.id.btn_plus:
+                    result=num1+num2;
+                    break;
+                case R.id.btn_minus:
+                    result=num1-num2;
+                    break;
+                case R.id.btn_multi:
+                    result=num1*num2;
+                    break;
+                case R.id.btn_divide:
+                    result=num1/num2;
+                    break;
+            }
+            textResult.setText("계산결과 : "+result);
+        }
+    };
 }
