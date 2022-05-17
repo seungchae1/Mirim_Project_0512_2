@@ -3,9 +3,11 @@ package kr.hs.emirim.s2125.mirim_project_0512_2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     EditText edit1, edit2;
@@ -18,5 +20,34 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        edit1 = findViewById(R.id.edit1);
+        edit2 = findViewById(R.id.edit2);
+        textResult = findViewById(R.id.text_result);
+        Button btnPluss = findViewById(R.id.btn_plus);
+        Button btnMinus = findViewById(R.id.btn_minus);
+        Button btnMulti = findViewById(R.id.btn_multi);
+        Button btnDivide = findViewById(R.id.btn_divide);
+
+        for(int i=0; i<btnNum.length; i++){
+            final int index = i;
+            btnNum[i]=findViewById(btnNumId[i]);
+            btnNum[index].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String s= "";
+                    if(edit1.isFocused()){
+                        s=edit1.getText().toString() + btnNum[index].getText();
+                        edit1.setText(s);
+                    }
+                    else if(edit2.isFocused()){
+                        s=edit2.getText().toString() + btnNum[index].getText();
+                        edit2.setText(s);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "EditText에 포커스가 없습니다.",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 }
